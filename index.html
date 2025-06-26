@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Portfolio | Lead Technical Account Manager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #334155;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #475569;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #3b82f6;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23e2e8f0" stroke-width="0.5" opacity="0.4"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #1e293b, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            color: #64748b;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .hero .description {
+            font-size: 1.1rem;
+            color: #475569;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #475569;
+            border: 2px solid #cbd5e1;
+        }
+
+        .btn-secondary:hover {
+            border-color: #3b82f6;
+            color: #3b82f6;
+            transform: translateY(-2px);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e293b, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: #64748b;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Experience Cards */
+        .experience-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .experience-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .experience-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .experience-title {
+            flex: 1;
+        }
+
+        .experience-title h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-title .company {
+            color: #3b82f6;
+            font-weight: 600;
+        }
+
+        .experience-title .location {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .experience-date {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+            color: white;
+        }
+
+        .experience-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .experience-list li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        .experience-list li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+            font-size: 0.8rem;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .skill-category h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-category h3::before {
+            content: '◆';
+            color: #3b82f6;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill-tag {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #475569;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: scale(1.05);
+        }
+
+        /* Education & Certifications */
+        .education-cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .info-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .cert-list {
+            list-style: none;
+        }
+
+        .cert-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+            color: #475569;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .cert-list li:last-child {
+            border-bottom: none;
+        }
+
+        .cert-list li::before {
+            content: '🏆';
+            font-size: 1.2rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: rgba(248, 250, 252, 0.9);
+            text-align: center;
+            border-top: 1px solid rgba(226, 232, 240, 0.5);
+        }
+
+        .contact-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact h2 {
+            margin-bottom: 1rem;
+        }
+
+        .contact p {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #f8fafc;
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(226, 232, 240, 0.5);
+        }
+
+        footer p {
+            color: #64748b;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 2rem 0;
+                min-height: 90vh;
+            }
+
+            .experience-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .btn {
+                width: fit-content;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">Portfolio</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content fade-in-up">
+                <h1>Sushanta Kharel</h1>
+                <p class="subtitle">Lead Technical Account Manager</p>
+                <p class="description">
+                    Experienced technical professional with expertise in customer success, operations coordination, and
+                    data management.
+                    Proven track record in scaling startup operations, optimizing workflows, and leveraging technical
+                    skills to drive business growth.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#experience" class="btn btn-primary">View Experience</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <div class="section-title">
+                <h2>Professional Experience</h2>
+                <p>Building successful client relationships and driving operational excellence across diverse industries
+                </p>
+            </div>
+
+            <div class="experience-grid">
+                <div class="experience-card fade-in-up">
+                    <div class="experience-header">
+                        <div class="experience-title">
+                            <h3>Lead Technical Account Manager</h3>
+                            <p class="company">Niural Inc</p>
+                            <p class="location">USA</p>
+                        </div>
+                        <div class="experience-date">2022 – Present</div>
+                    </div>
+                    <ul class="experience-list">
+                        <li>Communicated with customers to understand needs, providing assistance through email and
+                            phone calls</li>
+                        <li>Collaborated with developers to resolve client-blocking issues quickly and efficiently</li>
+                        <li>Optimized product flows to enhance client comfort and operational efficiency</li>
+                        <li>Managed daily inventory transactions and monthly invoices, ensuring timely and accurate
+                            delivery</li>
+                        <li>Played a pivotal role in scaling startup operations, assuming diverse responsibilities</li>
+                        <li>Trained customer support teams, enhancing communication and technical understanding</li>
+                        <li>Leveraged technical skills, including database queries and Python scripting, to streamline
+                            workflows</li>
+                        <li>Gained knowledge in Web3, including on-ramp/off-ramp processes and gas fees</li>
+                    </ul>
+                </div>
+
+                <div class="experience-card fade-in-up">
+                    <div class="experience-header">
+                        <div class="experience-title">
+                            <h3>Senior Operations Coordinator/Data Specialist</h3>
+                            <p class="company">Harvest</p>
+                            <p class="location">USA</p>
+                        </div>
+                        <div class="experience-date">March 2021 – July 2022</div>
+                    </div>
+                    <ul class="experience-list">
+                        <li>Acted as the primary contact for clients, addressing issues and ensuring smooth resolutions
+                        </li>
+                        <li>Negotiated with banks to handle refunds and resolve financial discrepancies</li>
+                        <li>Managed client cases, tracked progress, and ensured timely follow-ups</li>
+                        <li>Streamlined processes to boost team productivity and customer satisfaction</li>
+                        <li>Maintained accurate records, facilitating communication between clients, banks, and internal
+                            teams</li>
+                    </ul>
+                </div>
+
+                <div class="experience-card fade-in-up">
+                    <div class="experience-header">
+                        <div class="experience-title">
+                            <h3>Data Specialist</h3>
+                            <p class="company">CloudFactory</p>
+                            <p class="location">Kathmandu, Nepal</p>
+                        </div>
+                        <div class="experience-date">March 2019 – December 2021</div>
+                    </div>
+                    <ul class="experience-list">
+                        <li>Performed precise data annotation and entry for autonomous vehicle projects</li>
+                        <li>Verified data accuracy, maintaining compliance with project specifications</li>
+                        <li>Collaborated with team members to improve workflows, reducing turnaround times</li>
+                        <li>Identified and reported inconsistencies, contributing to quality improvement</li>
+                        <li>Played a key role in meeting deadlines and delivering client-aligned results</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <div class="section-title">
+                <h2>Skills & Expertise</h2>
+                <p>Technical proficiency combined with strong interpersonal and operational capabilities</p>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-category fade-in-up">
+                    <h3>Technical Skills</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">AWS Services</span>
+                        <span class="skill-tag">Python Scripting</span>
+                        <span class="skill-tag">Database Querying</span>
+                        <span class="skill-tag">Web3 Knowledge</span>
+                        <span class="skill-tag">Data Entry & Annotation</span>
+                        <span class="skill-tag">Inventory Management</span>
+                        <span class="skill-tag">Microsoft Office Suite</span>
+                        <span class="skill-tag">CRM Tools</span>
+                    </div>
+                </div>
+
+                <div class="skill-category fade-in-up">
+                    <h3>Interpersonal Skills</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Customer Support</span>
+                        <span class="skill-tag">Team Leadership</span>
+                        <span class="skill-tag">Conflict Resolution</span>
+                        <span class="skill-tag">Adaptability</span>
+                        <span class="skill-tag">Cross-functional Collaboration</span>
+                    </div>
+                </div>
+
+                <div class="skill-category fade-in-up">
+                    <h3>Operational Skills</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Account Management</span>
+                        <span class="skill-tag">Techinical Operation & Supports</span>
+                        <span class="skill-tag">Operational Coordination</span>
+                        <span class="skill-tag">Training & Onboarding</span>
+                        <span class="skill-tag">Process Optimization</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Certifications Section -->
+    <section id="education">
+        <div class="container">
+            <div class="section-title">
+                <h2>Education & Certifications</h2>
+                <p>Continuous learning and professional development</p>
+            </div>
+
+            <div class="education-cert-grid">
+                <div class="info-card fade-in-up">
+                    <h3>Education</h3>
+
+                    <div style="text-align: center; padding: 2rem 0;">
+                        <h4 style="color: #3b82f6; font-size: 1.2rem; margin-bottom: 0.5rem;">Masters in Business
+                            Administration</h4>
+                        <p style="color: #475569; font-size: 1.1rem; margin-bottom: 0.5rem;">Phoenix College of
+                            Management - Lincoln University College</p>
+                        <p style="color: #64748b;">Kathmandu, Nepal</p>
+                    </div>
+                    <div style="text-align: center; padding: 2rem 0;">
+                        <h4 style="color: #3b82f6; font-size: 1.2rem; margin-bottom: 0.5rem;">Bachelor of Business
+                            Studies</h4>
+                        <p style="color: #475569; font-size: 1.1rem; margin-bottom: 0.5rem;">Nepal Commerce Campus -
+                            Tribhuvan university</p>
+                        <p style="color: #64748b;">Kathmandu, Nepal</p>
+                    </div>
+                </div>
+
+                <div class="info-card fade-in-up">
+                    <h3>Certifications</h3>
+                    <ul class="cert-list">
+                        <li>HubSpot Inbound Certification</li>
+                        <li>Business Analysis & Process Management (Coursera)</li>
+                        <li>Operations Management (Great Learning)</li>
+                        <li>Payroll Regulatory Changes (EY)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2>Let's Connect</h2>
+                <p>Ready to bring my expertise in technical account management and operational excellence to your
+                    organization</p>
+                <div class="cta-buttons">
+                    <a href="mailto:your.email@example.com" class="btn btn-primary">Send Email</a>
+                    <a href="https://linkedin.com/in/yourprofile" class="btn btn-secondary" target="_blank">LinkedIn
+                        Profile</a>
+
+                    <a class="btn btn-secondary">(+977) 9843007042</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Sushanta Kharel. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function () {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(255, 255, 255, 0.98)';
+                nav.style.boxShadow = '0 8px 30px rgba(0, 0, 0, 0.12)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+                nav.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)';
+            }
+        });.scrollY > 50) {
+            nav.style.background = 'rgba(15, 23, 42, 0.95)';
+        } else {
+            nav.style.background = 'rgba(15, 23, 42, 0.9)';
+        }
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.8s ease-out';
+            observer.observe(el);
+        });
+
+        // Add hover effects to cards
+        document.querySelectorAll('.experience-card, .skill-category, .info-card').forEach(card => {
+            card.addEventListener('mouseenter', function () {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+
+            card.addEventListener('mouseleave', function () {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+
+</html>
